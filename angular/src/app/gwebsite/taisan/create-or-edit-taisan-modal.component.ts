@@ -12,7 +12,7 @@ export class CreateOrEditTaiSanModalComponent extends AppComponentBase {
 
 
     @ViewChild('createOrEditModal') modal: ModalDirective;
-    @ViewChild('taisanCombobox') taisanCombobox: ElementRef;
+    @ViewChild('taiSanCombobox') taiSanCombobox: ElementRef;
     @ViewChild('iconCombobox') iconCombobox: ElementRef;
     @ViewChild('dateInput') dateInput: ElementRef;
 
@@ -24,30 +24,30 @@ export class CreateOrEditTaiSanModalComponent extends AppComponentBase {
 
     saving = false;
 
-    taisan: TaiSanInput = new TaiSanInput();
+    taiSan: TaiSanInput = new TaiSanInput();
 
     constructor(
         injector: Injector,
-        private _taisanService: TaiSanServiceProxy
+        private _taiSanService: TaiSanServiceProxy
     ) {
         super(injector);
     }
 
-    show(taisanId?: number | null | undefined): void {
+    show(taiSanId?: number | null | undefined): void {
         this.saving = false;
 
 
-        this._taisanService.getTaiSanForEdit(taisanId).subscribe(result => {
-            this.taisan = result;
+        this._taiSanService.getTaiSanForEdit(taiSanId).subscribe(result => {
+            this.taiSan = result;
             this.modal.show();
 
         })
     }
 
     save(): void {
-        let input = this.taisan;
+        let input = this.taiSan;
         this.saving = true;
-        this._taisanService.createOrEditTaiSan(input).subscribe(result => {
+        this._taiSanService.createOrEditTaiSan(input).subscribe(result => {
             this.notify.info(this.l('SavedSuccessfully'));
             this.close();
         })

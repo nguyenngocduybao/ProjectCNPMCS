@@ -5,8 +5,8 @@
             <form #editForm="ngForm" novalidate (ngSubmit)="save()">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        <span *ngIf="taisan.id">Cập nhật tài sản: {{taisan.tentaisan}}</span>
-                        <span *ngIf="!taisan.id">Tạo mới tài sản</span>
+                        <span *ngIf="taiSan.id">Cập nhật tài sản: {{taiSan.tenTaiSan}}</span>
+                        <span *ngIf="!taiSan.id">Tạo mới tài sản</span>
                     </h4>
                     <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
                         <span aria-hidden="true">&times;</span>
@@ -14,36 +14,36 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                            <label>Mã tài sản *</label>
-                            <input #nameInput="ngModel" class="form-control" type="text" name="Name"
-                                [(ngModel)]="taisan.maTaiSan" required maxlength="64">
-                            <validation-messages [formCtrl]="nameInput"></validation-messages>
-                    </div>
-                    <div class="form-group">
                         <label>Tên tài sản *</label>
-                        <input #nameInput="ngModel" class="form-control" type="text" name="Name"
-                            [(ngModel)]="taisan.tenTaiSan" required maxlength="64">
-                        <validation-messages [formCtrl]="nameInput"></validation-messages>
+                        <input #TenTaiSanInput="ngModel" class="form-control" type="text" name="tenTaiSan"
+                               [(ngModel)]="taiSan.tenTaiSan" required maxlength="64">
+                        <validation-messages [formCtrl]="TenTaiSanInput"></validation-messages>
                     </div>
                     <div class="form-group">
-                        <label>Loại Tài Sản *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name="Address"
-                            [(ngModel)]="taisan.loaiTaiSan" required maxlength="64">
-                        <validation-messages [formCtrl]="addressInput"></validation-messages>
+                        <label>Loại tài sản *</label>
+                        <input #LoaiTaiSanInput="ngModel" class="form-control" type="text" name="loaiTaiSan"
+                               [(ngModel)]="taiSan.loaiTaiSan" required maxlength="64">
+                        <validation-messages [formCtrl]="LoaiTaiSanInput"></validation-messages>
                     </div>
                     <div class="form-group">
-                        <label>Nguyên Gía *</label>
-                        <input #addressInput="ngModel" class="form-control" type="text" name="Info"
-                            [(ngModel)]="taisan.nguyenGia" required maxlength="64">
-                        <validation-messages [formCtrl]="infoInput"></validation-messages>
+                        <label>Nguyên giá *</label>
+                        <input #NguyenGiaInput="ngModel" class="form-control" type="text" name="nguyenGia"
+                               [(ngModel)]="taiSan.nguyenGia" required maxlength="64">
+                        <validation-messages [formCtrl]="NguyenGiaInput"></validation-messages>
                     </div>
                     <div class="form-group">
                         <label>Trạng thái *</label>
-                        <input #nameInput="ngModel" class="form-control" type="text" name="Name"
-                            [(ngModel)]="taisan.trangThai" required maxlength="64">
-                        <validation-messages [formCtrl]="nameInput"></validation-messages>
-                    </div>                   
-                </div>
+                        <input #TrangThaiInput="ngModel" class="form-control" type="text" name="trangThai"
+                               [(ngModel)]="taiSan.trangThai" required maxlength="64">
+                        <validation-messages [formCtrl]="TrangThaiInput"></validation-messages>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số lượng *</label>
+                        <input #SoLuongInput="ngModel" class="form-control" type="text" name="soLuong"
+                               [(ngModel)]="taiSan.soLuong" required maxlength="64">
+                        <validation-messages [formCtrl]="SoLuongInput"></validation-messages>
+                    </div>                </div>
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-default"
                         (click)="close()">{{l("Cancel")}}</button>

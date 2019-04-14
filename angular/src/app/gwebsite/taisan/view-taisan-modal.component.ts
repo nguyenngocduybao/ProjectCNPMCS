@@ -11,19 +11,19 @@ import { ModalDirective } from 'ngx-bootstrap';
 
 export class ViewTaiSanModalComponent extends AppComponentBase {
 
-    taisan : TaiSanForViewDto = new TaiSanForViewDto();
+    taiSan : TaiSanForViewDto = new TaiSanForViewDto();
     @ViewChild('viewModal') modal: ModalDirective;
 
     constructor(
         injector: Injector,
-        private _taisanService: TaiSanServiceProxy
+        private _taiSanService: TaiSanServiceProxy
     ) {
         super(injector);
     }
 
-    show(taisanId?: number | null | undefined): void {
-        this._taisanService.getTaiSanForView(taisanId).subscribe(result => {
-            this.taisan = result;
+    show(taiSanId?: number | null | undefined): void {
+        this._taiSanService.getTaiSanForView(taiSanId).subscribe(result => {
+            this.taiSan = result;
             this.modal.show();
         })
     }
