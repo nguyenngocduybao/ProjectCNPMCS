@@ -1557,6 +1557,12 @@ namespace GSoft.AbpZeroTemplate.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<bool>("IsDelete");
+
                     b.Property<int?>("MaTaiSan");
 
                     b.Property<DateTime>("NgayCapPhat");
@@ -1564,6 +1570,10 @@ namespace GSoft.AbpZeroTemplate.Migrations
                     b.Property<int?>("SoLuong");
 
                     b.Property<string>("TenDonVi");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime?>("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -1630,6 +1640,12 @@ namespace GSoft.AbpZeroTemplate.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<bool>("IsDelete");
+
                     b.Property<int?>("MaTaiSan");
 
                     b.Property<DateTime>("NgayDieuChuyen");
@@ -1639,6 +1655,10 @@ namespace GSoft.AbpZeroTemplate.Migrations
                     b.Property<string>("TenDVDieuChuyen");
 
                     b.Property<string>("TenDVDuocDieuChuyen");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime?>("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -1770,6 +1790,12 @@ namespace GSoft.AbpZeroTemplate.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<bool>("IsDelete");
+
                     b.Property<string>("LoaiTaiSan");
 
                     b.Property<string>("NguyenGia");
@@ -1779,6 +1805,10 @@ namespace GSoft.AbpZeroTemplate.Migrations
                     b.Property<string>("TenTaiSan");
 
                     b.Property<int?>("TrangThai");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime?>("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -1791,6 +1821,12 @@ namespace GSoft.AbpZeroTemplate.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<bool>("IsDelete");
+
                     b.Property<int?>("MaTaiSan");
 
                     b.Property<DateTime>("NgayThuHoi");
@@ -1799,36 +1835,13 @@ namespace GSoft.AbpZeroTemplate.Migrations
 
                     b.Property<string>("TenDonViThuHoi");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("ThuHois");
-                });
-
-            modelBuilder.Entity("GWebsite.AbpZeroTemplate.Core.Models.Xiaomi", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTime?>("CreatedDate");
-
-                    b.Property<string>("Info");
-
-                    b.Property<bool>("IsDelete");
-
-                    b.Property<string>("Name");
-
                     b.Property<string>("UpdatedBy");
 
                     b.Property<DateTime?>("UpdatedDate");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Xiaomis");
+                    b.ToTable("ThuHois");
                 });
 
             modelBuilder.Entity("GSoft.AbpZeroTemplate.Editions.SubscribableEdition", b =>

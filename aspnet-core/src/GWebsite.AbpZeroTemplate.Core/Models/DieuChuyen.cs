@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Abp.Domain.Entities;
 namespace GWebsite.AbpZeroTemplate.Core.Models
 {
-    public class DieuChuyen:Entity<int>
+    public class DieuChuyen :FullAuditModel
     {
         public String TenDVDieuChuyen { get; set; }
         public int? SoLuong { get; set; }

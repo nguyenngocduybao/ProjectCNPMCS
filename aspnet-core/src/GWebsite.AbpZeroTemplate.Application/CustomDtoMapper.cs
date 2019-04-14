@@ -1,9 +1,13 @@
 using AutoMapper;
+using GWebsite.AbpZeroTemplate.Application.Share.DieuChuyens.Dto;
 using GWebsite.AbpZeroTemplate.Application.Share.Customers.Dto;
 using GWebsite.AbpZeroTemplate.Application.Share.DemoModels.Dto;
 using GWebsite.AbpZeroTemplate.Application.Share.MenuClients.Dto;
-using GWebsite.AbpZeroTemplate.Application.Share.Xiaomis.Dto;
+using GWebsite.AbpZeroTemplate.Application.Share.TaiSans.Dto;
+using GWebsite.AbpZeroTemplate.Application.Share.CapPhats.Dto;
+
 using GWebsite.AbpZeroTemplate.Core.Models;
+
 
 namespace GWebsite.AbpZeroTemplate.Applications
 {
@@ -28,11 +32,24 @@ namespace GWebsite.AbpZeroTemplate.Applications
             configuration.CreateMap<Customer, CustomerInput>();
             configuration.CreateMap<Customer, CustomerForViewDto>();
 
-            // Xiaomi
-            configuration.CreateMap<Xiaomi,XiaomisDto >();
-            configuration.CreateMap<XiaomisInput, Xiaomi>();
-            configuration.CreateMap<Xiaomi, XiaomisInput>();
-            configuration.CreateMap<Xiaomi, XiaomisForViewDto>();
+            // TaiSan
+            configuration.CreateMap<TaiSan, TaiSanDto>();
+            configuration.CreateMap<TaiSanInput, TaiSan>();
+            configuration.CreateMap<TaiSan, TaiSanInput>();
+            configuration.CreateMap<TaiSan, TaiSanForViewDto>();
+
+            //CapPhat
+
+            configuration.CreateMap<CapPhat, CapPhatDto>();
+            configuration.CreateMap<CapPhatInput, CapPhat>();
+            configuration.CreateMap<CapPhat, CapPhatInput>();
+            configuration.CreateMap<CapPhat, CapPhatForViewDto>();
+            
+            //DieuChuyen
+            configuration.CreateMap<DieuChuyen, DieuChuyenDto>();
+            configuration.CreateMap<DieuChuyenInput, DieuChuyen>();
+            configuration.CreateMap<DieuChuyen, DieuChuyenInput>();
+            configuration.CreateMap<DieuChuyen, DieuChuyenForViewDto>();
         }
     }
 }

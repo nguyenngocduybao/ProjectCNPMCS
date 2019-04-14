@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Abp.Domain.Entities;
+using GWebsite.AbpZeroTemplate.Core.Models;
 
 namespace GWebsite.AbpZeroTemplate.Core.Models
 {
-    public class TaiSan:Entity<int>
+    public class TaiSan:FullAuditModel
     {
         public string TenTaiSan { get; set; }
         public string LoaiTaiSan { get; set; }

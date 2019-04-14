@@ -7,7 +7,7 @@ using Abp.Domain.Entities;
 
 namespace GWebsite.AbpZeroTemplate.Core.Models
 {
-    public class CapPhat :Entity<int>
+    public class CapPhat : FullAuditModel
     {
         public string TenDonVi { get; set; }
         public int? SoLuong { get; set; }
