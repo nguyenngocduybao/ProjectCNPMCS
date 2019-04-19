@@ -46,7 +46,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             taiSanAppservice.DeleteTaiSan(id);
         }
-        [HttpPost]
+        [HttpGet]
         public TaiSanForViewDto GetTaiSanForView(int id)
         {
             return taiSanAppservice.GetTaiSanForView(id);

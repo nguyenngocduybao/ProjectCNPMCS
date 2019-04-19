@@ -13,6 +13,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.DieuChuyens
         void CreateOrEditDieuChuyen(DieuChuyenInput dieuChuyenInput);
         DieuChuyenInput GetDieuChuyenForEdit(int id);
         void DeleteDieuChuyen(int id);
+        PagedResultDto<DieuChuyenDto> GetDieuChuyens(DieuChuyenFilter input);
         DieuChuyenForViewDto GetDieuChuyenForView(int id);
     }
 }

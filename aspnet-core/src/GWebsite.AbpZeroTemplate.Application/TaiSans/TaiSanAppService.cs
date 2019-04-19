@@ -9,16 +9,21 @@ using GWebsite.AbpZeroTemplate.Core.Authorization;
 using GWebsite.AbpZeroTemplate.Core.Models;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+
 namespace GWebsite.AbpZeroTemplate.Web.Core.TaiSans
 {
     [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
     public class TaiSanAppService : GWebsiteAppServiceBase, ITaiSanAppService
     {
         private readonly IRepository<TaiSan> taisanrepository;
+
         public TaiSanAppService(IRepository<TaiSan> taisanrepository)
         {
             this.taisanrepository = taisanrepository;
         }
+
+        #region public method
+
         public void CreateOrEditTaiSan(TaiSanInput taiSanInput)
         {
             if (taiSanInput.Id == 0)
@@ -88,6 +93,9 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.TaiSans
                 totalCount,
                 items.Select(item => ObjectMapper.Map<TaiSanDto>(item)).ToList());
         }
+
+        #endregion
+
         #region Private Method
 
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]

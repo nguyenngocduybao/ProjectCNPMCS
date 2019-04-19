@@ -9,17 +9,23 @@ using GWebsite.AbpZeroTemplate.Core.Authorization;
 using GWebsite.AbpZeroTemplate.Core.Models;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+
 namespace GWebsite.AbpZeroTemplate.Web.Core.CapPhats
 {
     [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient)]
     public class CapPhatAppService : GWebsiteAppServiceBase, ICapPhatAppService
     {
         private readonly IRepository<CapPhat> capPhatrepository;
-        public CapPhatAppService(IRepository<CapPhat> capPhatrepository)
+        private readonly IRepository<TaiSan> taisanrepository;
+
+        public CapPhatAppService(IRepository<CapPhat> capPhatrepository, IRepository<TaiSan> taisanrepository)
         {
             this.capPhatrepository = capPhatrepository;
+            this.taisanrepository = taisanrepository;
         }
+
         #region public method
+
         public void CreateOrEditCapPhat(CapPhatInput capPhatInput)
         {
             if (capPhatInput.Id == 0)
@@ -62,14 +68,53 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.CapPhats
             }
             return ObjectMapper.Map<CapPhatForViewDto>(capPhatEntity);
         }
+
+        public PagedResultDto<CapPhatDto> GetCapPhats(CapPhatFilter input)
+        {
+            var query = capPhatrepository.GetAll().Where(x => !x.IsDelete);
+
+            // filter by value
+            if (input.TenDonVi != null)
+            {
+                query = query.Where(x => x.TenDonVi.ToLower().Equals(input.TenDonVi));
+            }
+
+            var totalCount = query.Count();
+
+            // sorting
+            if (!string.IsNullOrWhiteSpace(input.Sorting))
+            {
+                query = query.OrderBy(input.Sorting);
+            }
+
+            // paging
+            var items = query.PageBy(input).ToList();
+
+            // result
+            return new PagedResultDto<CapPhatDto>(
+                totalCount,
+                items.Select(item => ObjectMapper.Map<CapPhatDto>(item)).ToList());
+        }    
+
         #endregion
+
         #region Private Method
+
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
         private void Create(CapPhatInput CapPhatInput)
-        {
+        {            
+            var taiSanEnity = taisanrepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == CapPhatInput.MaTaiSan);
+            if (CapPhatInput.SoLuong > taiSanEnity.SoLuong)
+            {                
+                return;
+            }
+
             var capPhatEnity = ObjectMapper.Map<CapPhat>(CapPhatInput);
             SetAuditInsert(capPhatEnity);
             capPhatrepository.Insert(capPhatEnity);
+            
+            taiSanEnity.SoLuong -= CapPhatInput.SoLuong;
+
             CurrentUnitOfWork.SaveChanges();
         }
 

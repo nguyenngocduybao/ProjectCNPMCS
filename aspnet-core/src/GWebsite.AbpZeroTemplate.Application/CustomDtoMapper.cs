@@ -7,7 +7,7 @@ using GWebsite.AbpZeroTemplate.Application.Share.TaiSans.Dto;
 using GWebsite.AbpZeroTemplate.Application.Share.CapPhats.Dto;
 
 using GWebsite.AbpZeroTemplate.Core.Models;
-
+using GWebsite.AbpZeroTemplate.Application.Share.ThuHois.Dto;
 
 namespace GWebsite.AbpZeroTemplate.Applications
 {
@@ -39,7 +39,6 @@ namespace GWebsite.AbpZeroTemplate.Applications
             configuration.CreateMap<TaiSan, TaiSanForViewDto>();
 
             //CapPhat
-
             configuration.CreateMap<CapPhat, CapPhatDto>();
             configuration.CreateMap<CapPhatInput, CapPhat>();
             configuration.CreateMap<CapPhat, CapPhatInput>();
@@ -50,6 +49,12 @@ namespace GWebsite.AbpZeroTemplate.Applications
             configuration.CreateMap<DieuChuyenInput, DieuChuyen>();
             configuration.CreateMap<DieuChuyen, DieuChuyenInput>();
             configuration.CreateMap<DieuChuyen, DieuChuyenForViewDto>();
+
+            //ThuHoi
+            configuration.CreateMap<ThuHoi, ThuHoiDto>();
+            configuration.CreateMap<ThuHoiInput, ThuHoi>();
+            configuration.CreateMap<ThuHoi, ThuHoiInput>();
+            configuration.CreateMap<ThuHoi, ThuHoiForViewDto>();
         }
     }
 }

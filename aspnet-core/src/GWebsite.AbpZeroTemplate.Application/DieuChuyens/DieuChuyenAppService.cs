@@ -16,6 +16,7 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.DieuChuyens
     public class DieuChuyenAppService : GWebsiteAppServiceBase, IDieuChuyenAppService
     {
         private readonly IRepository<DieuChuyen> dieuChuyenrepository;
+
         public DieuChuyenAppService(IRepository<DieuChuyen> dieuChuyenrepository)
         {
             this.dieuChuyenrepository = dieuChuyenrepository;
@@ -63,6 +64,33 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.DieuChuyens
                 return null;
             }
             return ObjectMapper.Map<DieuChuyenInput>(dieuChuyenEntity);
+        }
+
+        public PagedResultDto<DieuChuyenDto> GetDieuChuyens(DieuChuyenFilter input)
+        {
+            var query = dieuChuyenrepository.GetAll().Where(x => !x.IsDelete);
+
+            // filter by value
+            if (input.TenDVDieuChuyen != null)
+            {
+                query = query.Where(x => x.TenDVDieuChuyen.ToLower().Equals(input.TenDVDieuChuyen));
+            }
+
+            var totalCount = query.Count();
+
+            // sorting
+            if (!string.IsNullOrWhiteSpace(input.Sorting))
+            {
+                query = query.OrderBy(input.Sorting);
+            }
+
+            // paging
+            var items = query.PageBy(input).ToList();
+
+            // result
+            return new PagedResultDto<DieuChuyenDto>(
+                totalCount,
+                items.Select(item => ObjectMapper.Map<DieuChuyenDto>(item)).ToList());
         }
         #endregion
         #region private method

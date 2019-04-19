@@ -25,7 +25,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
             return "Test";
         }
 
-
+        [HttpGet]
+        public PagedResultDto<ThuHoiDto> GetThuHoisByFilter(ThuHoiFilter ThuHoiFilter)
+        {
+            return thuHoiAppservice.GetThuHois(ThuHoiFilter);
+        }
         [HttpPost]
         public void CreateOrEditThuHoi([FromBody] ThuHoiInput input)
         {
@@ -42,7 +46,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             thuHoiAppservice.DeleteThuHoi(id);
         }
-        [HttpPost]
+        [HttpGet]
         public ThuHoiForViewDto GetThuHoiForView(int id)
         {
             return thuHoiAppservice.GetThuHoiForView(id);

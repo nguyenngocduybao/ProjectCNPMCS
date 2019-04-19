@@ -43,7 +43,8 @@
                         <input #SoLuongInput="ngModel" class="form-control" type="text" name="soLuong"
                                [(ngModel)]="taiSan.soLuong" required maxlength="64">
                         <validation-messages [formCtrl]="SoLuongInput"></validation-messages>
-                    </div>                </div>
+                    </div>
+                </div>
                 <div class="modal-footer">
                     <button [disabled]="saving" type="button" class="btn btn-default"
                         (click)="close()">{{l("Cancel")}}</button>

@@ -15,9 +15,14 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.ThuHois
     public class ThuHoiAppService:GWebsiteAppServiceBase,IThuHoiAppService
     {
         private readonly IRepository<ThuHoi> thuHoirepository;
-        public ThuHoiAppService(IRepository<ThuHoi> thuHoirepository)
+        private readonly IRepository<CapPhat> capPhatrepository;
+        private readonly IRepository<TaiSan> taisanrepository;
+
+        public ThuHoiAppService(IRepository<ThuHoi> thuHoirepository, IRepository<CapPhat> capPhatrepository, IRepository<TaiSan> taisanrepository)
         {
             this.thuHoirepository = thuHoirepository;
+            this.capPhatrepository = capPhatrepository;
+            this.taisanrepository = taisanrepository;
         }
         public void CreateOrEditThuHoi(ThuHoiInput thuHoiInput)
         {
@@ -61,14 +66,51 @@ namespace GWebsite.AbpZeroTemplate.Web.Core.ThuHois
             }
             return ObjectMapper.Map<ThuHoiInput>(thuHoiEnity);
         }
+
+        public PagedResultDto<ThuHoiDto> GetThuHois(ThuHoiFilter input)
+        {
+            var query = thuHoirepository.GetAll().Where(x => !x.IsDelete);
+
+            // filter by value
+            if (input.TenDonViThuHoi != null)
+            {
+                query = query.Where(x => x.TenDonViThuHoi.ToLower().Equals(input.TenDonViThuHoi));
+            }
+
+            var totalCount = query.Count();
+
+            // sorting
+            if (!string.IsNullOrWhiteSpace(input.Sorting))
+            {
+                query = query.OrderBy(input.Sorting);
+            }
+
+            // paging
+            var items = query.PageBy(input).ToList();
+
+            // result
+            return new PagedResultDto<ThuHoiDto>(
+                totalCount,
+                items.Select(item => ObjectMapper.Map<ThuHoiDto>(item)).ToList());
+        }
         #region Private Method
 
         [AbpAuthorize(GWebsitePermissions.Pages_Administration_MenuClient_Create)]
         private void Create(ThuHoiInput thuHoiInput)
         {
+            var capPhatEnity = capPhatrepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.TenDonVi == thuHoiInput.TenDonViThuHoi && x.MaTaiSan == thuHoiInput.MaTaiSan);
+            if (capPhatEnity != null && thuHoiInput.SoLuong > capPhatEnity.SoLuong || capPhatEnity == null)
+            {
+                return;
+            }
+
             var thuHoiEnity = ObjectMapper.Map<ThuHoi>(thuHoiInput);
             SetAuditInsert(thuHoiEnity);
             thuHoirepository.Insert(thuHoiEnity);
+
+            var taiSanEnity = taisanrepository.GetAll().Where(x => !x.IsDelete).SingleOrDefault(x => x.Id == thuHoiInput.MaTaiSan);
+            taiSanEnity.SoLuong += thuHoiInput.SoLuong;
+
             CurrentUnitOfWork.SaveChanges();
         }
 

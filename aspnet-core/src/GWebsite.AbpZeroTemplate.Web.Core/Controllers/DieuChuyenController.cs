@@ -25,7 +25,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
             return "Test";
         }
 
-
+        [HttpGet]
+        public PagedResultDto<DieuChuyenDto> GetDieuChuyensByFilter(DieuChuyenFilter DieuChuyenFilter)
+        {
+            return dieuChuyenAppservice.GetDieuChuyens(DieuChuyenFilter);
+        }
         [HttpPost]
         public void CreateOrEditDieuChuyen([FromBody] DieuChuyenInput input)
         {
@@ -42,7 +46,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             dieuChuyenAppservice.DeleteDieuChuyen(id);
         }
-        [HttpPost]
+        [HttpGet]
         public DieuChuyenForViewDto GetDieuChuyenForView(int id)
         {
             return dieuChuyenAppservice.GetDieuChuyenForView(id);

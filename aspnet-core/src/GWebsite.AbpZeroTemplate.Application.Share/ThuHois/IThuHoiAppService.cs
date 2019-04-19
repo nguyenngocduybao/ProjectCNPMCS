@@ -13,6 +13,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.ThuHois
         void CreateOrEditThuHoi(ThuHoiInput thuHoiInput);
         ThuHoiInput GetThuHoiForEdit(int id);
         void DeleteThuHoi(int id);
+        PagedResultDto<ThuHoiDto> GetThuHois(ThuHoiFilter input);
         ThuHoiForViewDto GetThuHoiForView(int id);
     }
 }

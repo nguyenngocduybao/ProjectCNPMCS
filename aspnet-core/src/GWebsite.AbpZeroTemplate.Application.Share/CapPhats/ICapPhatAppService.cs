@@ -13,6 +13,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Share.CapPhats
         void CreateOrEditCapPhat(CapPhatInput capPhatInput);
         CapPhatInput GetCapPhatForEdit(int id);
         void DeleteCapPhat(int id);
+        PagedResultDto<CapPhatDto> GetCapPhats(CapPhatFilter input);
         CapPhatForViewDto GetCapPhatForView(int id);
     }
 }

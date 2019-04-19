@@ -24,8 +24,11 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             return "Test";
         }
-
-       
+        [HttpGet]
+        public PagedResultDto<CapPhatDto> GetCapPhatsByFilter(CapPhatFilter CapPhatFilter)
+        {
+            return capPhatAppservice.GetCapPhats(CapPhatFilter);
+        }
         [HttpPost]
         public void CreateOrEditCapPhat([FromBody] CapPhatInput input)
         {
@@ -42,7 +45,7 @@ namespace GWebsite.AbpZeroTemplate.Application.Controllers
         {
             capPhatAppservice.DeleteCapPhat(id);
         }
-        [HttpPost]
+        [HttpGet]
         public CapPhatForViewDto GetCapPhatForView(int id)
         {
             return capPhatAppservice.GetCapPhatForView(id);
