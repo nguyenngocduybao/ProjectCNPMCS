@@ -1,4 +1,4 @@
-# ProjectCNPMCS
+# ProjectCNPMCS-Nhóm 7
 16520085 - Nguyễn Ngọc Duy Bảo
 
 16520067 - Phan Trọng Ba
